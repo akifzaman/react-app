@@ -1,41 +1,25 @@
+import { useState } from "react";
 import Alert from "./components/Alert";
 import Button from "./components/Button";
 import ListGroup from "./components/ListGroup";
 
 //main App component
 function App() {
-  let items = ["1", "2", "3", "4", "5"];
+  const [isVisible, setIsVisible] = useState(false); //use hook unconditionally and only at the top level of the component
+  const [isApproved, setIsApproved] = useState(true);
 
-  const handleSelectItem = (item: string) => {
-    console.log("Selected item: " + item);
-  };
+  let count = 0;
 
   const handleClick = () => {
-    console.log("Button clicked!");
+    setIsVisible(true);
+    count++; //state is stored outside of component lifecycle. State is managed by React, not the function
+    console.log(isVisible); //react updates state asynchronously
+    console.log(count);
   };
 
   return (
-    // <div className="App">
-    //   <ListGroup
-    //     items={items}
-    //     heading="Cities"
-    //     onSelectItem={handleSelectItem}
-    //   />
-    //   <ListGroup
-    //     items={items}
-    //     heading="Cities"
-    //     onSelectItem={handleSelectItem}
-    //   />
-    // </div>
-
-    // <div>
-    //   <Alert>A simple primary alert—check it out!</Alert>
-    // </div>
-
     <div>
-      <Button color="warning" onClick={handleClick}>
-        Shop Now!
-      </Button>
+      <Button onClick={handleClick}>Show!</Button>
     </div>
   );
 }
