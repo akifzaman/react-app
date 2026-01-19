@@ -5,16 +5,20 @@ import ListGroup from "./components/ListGroup";
 
 //main App component
 function App() {
-  const [isVisible, setIsVisible] = useState(false); //use hook unconditionally and only at the top level of the component
-  const [isApproved, setIsApproved] = useState(true);
+  // const [firstName, setFirstName] = useState("");
+  // const [lastName, setLastName] = useState("");
 
-  let count = 0;
+  const [person, setPerson] = useState({
+    firstName: "",
+    lastName: "",
+  });
+
+  //const fullName = firstName + " " + lastName;
 
   const handleClick = () => {
-    setIsVisible(true);
-    count++; //state is stored outside of component lifecycle. State is managed by React, not the function
-    console.log(isVisible); //react updates state asynchronously
-    console.log(count);
+    //console.log(fullName);
+    setPerson({ firstName: "John", lastName: "Doe" });
+    console.log(person.firstName + " " + person.lastName);
   };
 
   return (
