@@ -1,6 +1,9 @@
+let count = 0;
 
-function Message() {
-    return <h1>Hello, this is a message component!</h1>;
-}
+const Message = () => {
+  console.log(`Message ${count}`);
+  count++;
+  return <div>Message {count}</div>;
+};
 
 export default Message;
