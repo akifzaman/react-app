@@ -9,27 +9,21 @@ function App() {
   const [drink, setDrink] = useState({
     title: "Coke",
     price: 5,
+    address: {
+      city: "New York",
+      zipCode: 10001,
+    },
   });
 
   const handleClick = () => {
-    //doing the next two lines will not render as expected because drink is immutable
-    // drink.price = 6;
-    // setDrink(drink);
-
-    //pass a new object to setDrink to update the state
-    // const newDrink = {
-    //   title: drink.title,
-    //   price: 6,
-    // };
-    // setDrink(newDrink);
-
-    //use the spread operator to copy the existing properties and update the one property that needs to change
-    setDrink({ ...drink, price: 6 });
+    //to update the zipCode only
+    setDrink({ ...drink, address: { ...drink.address, zipCode: 20002 } });
+    console.log(drink.address.zipCode);
   };
 
   return (
     <div>
-      {drink.price}
+      {drink.address.zipCode}
       <Button onClick={handleClick}>Show!</Button>
     </div>
   );
