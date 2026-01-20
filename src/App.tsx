@@ -6,25 +6,29 @@ import ListGroup from "./components/ListGroup";
 //main App component
 function App() {
   //immutable
-  const [drink, setDrink] = useState({
-    title: "Coke",
-    price: 5,
-    address: {
-      city: "New York",
-      zipCode: 10001,
-    },
-  });
+  const [tags, setTags] = useState(["happy", "sad", "angry"]);
 
   const handleClick = () => {
-    //to update the zipCode only
-    setDrink({ ...drink, address: { ...drink.address, zipCode: 20002 } });
-    console.log(drink.address.zipCode);
+    if (tags.includes("excited")) return;
+
+    //Add
+    setTags([...tags, "excited"]);
+
+    //Remove
+    setTags([...tags.filter((tag) => tag !== "angry")]);
+
+    //update
+    setTags([...tags.map((tag) => (tag === "sad" ? "content" : tag))]);
   };
 
   return (
     <div>
-      {drink.address.zipCode}
-      <Button onClick={handleClick}>Show!</Button>
+      {/* <Button onClick={handleClick}>Show!</Button> */}
+      <ListGroup
+        items={tags}
+        heading="Expressions"
+        onSelectItem={handleClick}
+      />
     </div>
   );
 }
