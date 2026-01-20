@@ -6,29 +6,19 @@ import ListGroup from "./components/ListGroup";
 //main App component
 function App() {
   //immutable
-  const [tags, setTags] = useState(["happy", "sad", "angry"]);
+  const [bugs, setBugs] = useState([
+    { id: 1, title: "Bug1", fixed: false },
+    { id: 2, title: "Bug2", fixed: false },
+  ]);
 
   const handleClick = () => {
-    if (tags.includes("excited")) return;
-
-    //Add
-    setTags([...tags, "excited"]);
-
-    //Remove
-    setTags([...tags.filter((tag) => tag !== "angry")]);
-
-    //update
-    setTags([...tags.map((tag) => (tag === "sad" ? "content" : tag))]);
+    setBugs(bugs.map((bug) => (bug.id === 1 ? { ...bug, fixed: true } : bug)));
   };
 
   return (
     <div>
-      {/* <Button onClick={handleClick}>Show!</Button> */}
-      <ListGroup
-        items={tags}
-        heading="Expressions"
-        onSelectItem={handleClick}
-      />
+      {bugs[0].fixed.toString()}
+      <Button onClick={handleClick}>Show!</Button>
     </div>
   );
 }
