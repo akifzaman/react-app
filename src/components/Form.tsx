@@ -1,51 +1,39 @@
 import React, { FormEvent, useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { FieldValues, useForm } from "react-hook-form";
 const Form = () => {
-  const [person, setPerson] = useState({
-    name: "",
-    age: "",
-  });
+  const { register, handleSubmit } = useForm();
 
-  const handSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    console.log("Form submitted");
-    console.log(person);
+  const onSubmit = (data: FieldValues) => {
+    console.log(data);
   };
+
   return (
-    <form onSubmit={(event) => handSubmit(event)}>
-      {/* div.mb-3>label.form-label+input.form-control */}
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
         <label htmlFor="name" className="form-label">
           Name
         </label>
         <input
-          onChange={(event) => {
-            setPerson({ ...person, name: event.target.value });
-          }}
-          value={person.name}
+          {...register("name")}
           type="text"
           className="form-control"
           id="name"
         />
       </div>
 
-      {/* div.mb-3>label.form-label+input[type=number].form-control */}
       <div className="mb-3">
         <label htmlFor="age" className="form-label">
           Age
         </label>
         <input
-          onChange={(event) => {
-            setPerson({ ...person, age: event.target.value });
-          }}
-          value={person.age}
+          {...register("age")}
           type="number"
           className="form-control"
           id="age"
         />
       </div>
-
-      {/* button.btn.btn-primary */}
+      {/* a button inside the form is used to submit the form */}
       <button className="btn btn-primary">Submit</button>
     </form>
   );
