@@ -5,18 +5,29 @@ import ListGroup from "./components/ListGroup";
 import produce from "immer";
 import NavBar from "./components/NavBar";
 import Cart from "./components/Cart";
+import { set } from "immer/dist/internal";
 
 //main App component
 function App() {
   //immutable
-  const [cartItems, setCartItems] = useState(["item1", "item2", "item3"]);
+  const [game, setGame] = useState({
+    id: 1,
+    player: {
+      name: "John",
+      age: 25,
+    },
+  });
 
-  const onClear = () => {};
+  const handleClick = () => {
+    setGame({ ...game, player: { ...game.player, name: "Doe" } });
+  };
 
   return (
     <div>
-      <NavBar cartItemsCount={cartItems.length} />
-      <Cart cartItems={cartItems} onClear={() => setCartItems([])} />
+      <p>Player ID: {game.id}</p>
+      <p>Player Name: {game.player.name}</p>
+      <p>Player Age: {game.player.age}</p>
+      <Button onClick={handleClick}>Update Player Name</Button>
     </div>
   );
 }
