@@ -19,7 +19,11 @@ function App() {
   });
 
   const handleClick = () => {
-    setGame({ ...game, player: { ...game.player, name: "Doe" } });
+    setGame(
+      produce(game, (draft) => {
+        draft.player.name = "Doe";
+      })
+    );
   };
 
   return (
