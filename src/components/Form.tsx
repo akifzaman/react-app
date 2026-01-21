@@ -1,20 +1,15 @@
-import React, { FormEvent, useRef } from "react";
+import React, { FormEvent, useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 const Form = () => {
-  //always initialize refs with null because initially there is no DOM element associated with them
-  const nameRef = useRef<HTMLInputElement>(null);
-  const ageRef = useRef<HTMLInputElement>(null);
-
-  const person = { name: "", age: 0 };
+  const [person, setPerson] = useState({
+    name: "",
+    age: "",
+  });
 
   const handSubmit = (event: FormEvent) => {
     event.preventDefault();
     console.log("Form submitted");
-    if (nameRef.current && ageRef.current) {
-      person.name = nameRef.current.value;
-      person.age = parseInt(ageRef.current.value);
-      console.log(person);
-    }
+    console.log(person);
   };
   return (
     <form onSubmit={(event) => handSubmit(event)}>
@@ -23,7 +18,15 @@ const Form = () => {
         <label htmlFor="name" className="form-label">
           Name
         </label>
-        <input type="text" className="form-control" id="name" ref={nameRef} />
+        <input
+          onChange={(event) => {
+            setPerson({ ...person, name: event.target.value });
+          }}
+          value={person.name}
+          type="text"
+          className="form-control"
+          id="name"
+        />
       </div>
 
       {/* div.mb-3>label.form-label+input[type=number].form-control */}
@@ -31,7 +34,15 @@ const Form = () => {
         <label htmlFor="age" className="form-label">
           Age
         </label>
-        <input type="number" className="form-control" id="age" ref={ageRef} />
+        <input
+          onChange={(event) => {
+            setPerson({ ...person, age: event.target.value });
+          }}
+          value={person.age}
+          type="number"
+          className="form-control"
+          id="age"
+        />
       </div>
 
       {/* button.btn.btn-primary */}
