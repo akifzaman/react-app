@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 
 //ReactDOM is used to render the React application into the DOM
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
@@ -9,5 +10,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   //this does not affect the production build
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
